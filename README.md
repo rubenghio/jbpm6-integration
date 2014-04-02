@@ -1,4 +1,4 @@
-jbpm6-integration
-=================
+bandamiliar-bpm
+===============
 
-Proyecto de servicios de integración / extensión de jBPM6
+Procesos de negocio
