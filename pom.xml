@@ -12,7 +12,7 @@
 	<properties>
 		<java.version>1.7</java.version>
 		<jee.version>3.0.2.Final-redhat-7</jee.version>
-		<jbpm.version>6.0.1.Final</jbpm.version>
+		<jbpm.version>6.0.0.Final</jbpm.version>
 		<h2.version>1.3.175</h2.version>
 	</properties>
 
@@ -43,11 +43,6 @@
 				<artifactId>h2</artifactId>
 				<scope>test</scope>
 				<version>${h2.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jboss.jbpm.module</groupId>
-				<artifactId>process</artifactId>
-				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

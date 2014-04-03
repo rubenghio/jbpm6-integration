@@ -1,4 +1,4 @@
-package py.com.familiar.scc.chequera.process;
+package org.jboss.jbpm.process.process;
 
 import java.util.List;
 
@@ -13,27 +13,27 @@ import org.kie.api.task.model.Task;
 import org.kie.api.task.model.TaskSummary;
 import org.kie.internal.runtime.manager.context.ProcessInstanceIdContext;
 
-public class SeguimientoChequeraTest extends JbpmJUnitBaseTestCase {
+public class ExampleTest extends JbpmJUnitBaseTestCase {
 	public static final String USERID = "rghio";
 	public static final String UK = "en-UK";
 
-	public SeguimientoChequeraTest() {
+	public ExampleTest() {
 		super(true, false);
 	}
 
 	@Test
 	public void testProcessProcessInstanceStrategy() {
 		RuntimeManager manager = createRuntimeManager(
-				Strategy.PROCESS_INSTANCE, "manager", "Chequeras.bpmn2");
+				Strategy.PROCESS_INSTANCE, "manager", "example.bpmn2");
 		RuntimeEngine runtimeEngine = getRuntimeEngine(ProcessInstanceIdContext
 				.get());
 		KieSession ksession = runtimeEngine.getKieSession();
 		TaskService taskService = runtimeEngine.getTaskService();
 		int ksessionID = ksession.getId();
 		ProcessInstance processInstance = ksession
-				.startProcess("scc-chequera-process.Chequeras");
+				.startProcess("process.example");
 		assertProcessInstanceActive(processInstance.getId(), ksession);
-		assertNodeTriggered(processInstance.getId(), "Inicio", "Avanzar");
+		assertNodeTriggered(processInstance.getId(), "Start", "Accept");
 		manager.disposeRuntimeEngine(runtimeEngine);
 		runtimeEngine = getRuntimeEngine(ProcessInstanceIdContext
 				.get(processInstance.getId()));
@@ -53,7 +53,7 @@ public class SeguimientoChequeraTest extends JbpmJUnitBaseTestCase {
 		assertFalse(tasks.isEmpty());
 		assertEquals(1, tasks.size());
 		taskService.complete(task.getId(), USERID, null);
-		assertNodeTriggered(processInstance.getId(), "Fin");
+		assertNodeTriggered(processInstance.getId(), "End");
 		assertProcessInstanceCompleted(processInstance.getId(), ksession);
 	}
 }
